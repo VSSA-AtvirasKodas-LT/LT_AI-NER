@@ -1,0 +1,22 @@
+model_checkpoint: neurotechnology/BLKT-ModernBert-MLM-Stage3-RC1
+output_dir: output_modernbert_rc1
+trainer_output_dir: output_modernbert_rc1/model
+train_dir: data/conll_train/
+test_dir: data/conll_test/
+seed: 42
+cross_validation: false
+cross_validation_folds: 5
+
+training:
+  num_epochs: 10
+  learning_rate: 2e-5
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 8
+  weight_decay: 0.01
+  logging_steps: 10
+  eval_strategy: epoch
+  save_strategy: epoch
+  save_total_limit: 2
+  gradient_accumulation_steps: 1
+  warmup_ratio: 0.0
+  fp16: true
