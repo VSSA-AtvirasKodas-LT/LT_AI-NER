@@ -70,23 +70,18 @@ make finetune_modernbertRC1
 
 Modelio testavimo skriptai yra pateikti `inference_rc1.ipynb` faile. Ten rasite modelio naudojimo DEMO ir tuo pačiu galėsite ištestuoti savo apmokytus modelius.
 
-
 ## Skaičiuojami įvertinimo rodikliai
 
 Kiekvienas modelis apmokymo metu yra įvertinamas šiomis metrikomis:
 
-_Token-Level:_
-- Accuracy
-- Precision
-- Recall
-- F1-score
+1. **Teksto vienetų (angl. *tokens*) lygiu:**
+   - Tikslumas  
+   - Preciziškumas  
+   - Atkūrimo statistika  
+   - F1 statistika  
 
-_Entity-Level:_
-- Exact Match: Full span and type must match
-- Overlap Match: Any token overlap with same label counts
-- Union Match: Prediction overlaps in any way with true entity
-
-_Each of these includes:_
-- Precision
-- Recall
-- F1-score
+2. **Esybių (angl. *entities*) lygiu:**  
+   Modelio veikimas vertinamas pagal preciziškumą, atkūrimo statistiką ir F1 rodiklį, taikant skirtingus atitikimo kriterijus:
+   - **Tikslus atitikimas** (*exact match*) – esybės tipas ir visa jos sritis (pradžia ir pabaiga) turi tiksliai sutapti.  
+   - **Persidengiantis atitikimas** (*overlap match*) – laikoma teisinga, jei bent vienas žodis sutampa su ta pačia žyme.  
+   - **Sąjungos atitikimas** (*union match*) – laikoma teisinga, jei prognozė bet kaip persidengia su tikrąja esybe. 
