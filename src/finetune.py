@@ -31,7 +31,8 @@ from sklearn.model_selection import KFold
 import seaborn as sns
 import torch
 
-torch.cuda.set_device(0)
+if torch.cuda.is_available():
+    torch.cuda.set_device(0)
 
 def run_fold(
     fold_idx: int,

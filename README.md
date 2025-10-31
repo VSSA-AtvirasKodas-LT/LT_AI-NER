@@ -1,6 +1,6 @@
-# MLKV VMS
+# MLKVM validavimo sprendimas
 
-MLKVM modelio kokybės validavimas pagal vieną iš GLUE (angl. General Language Understanding Evaluation) vertinimo metodikoje (https://gluebenchmark.com/) numatytų vertinimo užduočių: įvardytų esybių atpažinimas.
+MLKVM kokybės validavimas pagal vieną iš GLUE (angl. General Language Understanding Evaluation) vertinimo metodikoje (https://gluebenchmark.com/) numatytų vertinimo užduočių: įvardytų esybių atpažinimas.
 
 ## Modelis
 
@@ -17,7 +17,21 @@ Validuoti modeliai:
 
 Atlikti skaičiavimams reikia 8GB vaizdo plokštės atminties.
 
-## Duomenų paruošimas
+## Programos paleidimas
+
+Norint paleisti programą, reikia suskurti virtualią aplinką ir į ją įrašyti reikiamas naudojamų bibliotekų versijas. Tai galima padaryti su komanda:
+```bash
+make prepare_python
+```
+
+Modelį pavyks paleisti tik pasiruoštoje virtualioje aplinkoje su nurodytomis bibliotekų versijomis.Norint paleisti visą programą, pirmiausia parsisiunčiame duomenis, juos paruošiame, paleidžiame modelio apmokinimo kodą ir atliekame įvertinimą. Visą tai galime atlikti su viena komanda:
+```bash
+make all
+```
+
+Programą galime paleisti ir pažingsniui. Norint tai padaryti, sekite žemiau pateiktus žingsnius.
+
+### Duomenų paruošimas
 
 Norint pradėti dirbti su duomenimis, mum reikia prieigos prie:
 - Lithuanian jsonl Named Entity Recognition duomenų rinkinio su mokinimo ir testavimo duomenimis (https://github.com/tilde-nlp/MultiLeg-dataset/tree/main, direktorijos data/lt/);
@@ -26,12 +40,10 @@ Duomenys turi būti atsiųsti į direktorijas:
 - data/lt_test
 - data/lt_train
 
-Automatiškai galima parsisiųsti duomenis naudojant komandą:
+Duomenis galima parsisiųsti automatiškai naudojant komandą:
 ```bash
 make getdata
 ```
-
-### Duomenų pavertimas iš `jsonl` formato į `conll` formatą
 
 Modelį apmokinant įvardytų esybių atpažinimo uždaviniui naudojamas Conll formatas. Kadangi mūsų duomenys yra `jsonl` formato, juos pasiverčiame į `conll` formatą naudodami `src/utils/jsonl_converter.py` kodą.
 
@@ -41,31 +53,26 @@ Norint atlikti pavertimą, paleidžiame kodą:
 python src/utils/prepare_jsonl.py
 ```
 
-Norint atsisiųsti `jsonl` formato duomenis ir automatiškai juos pasiversti į `conll` formatą, naudojame komandą:
+Norint visus duomenų paruošimo žingsius atlikti pasinaudojus viena komanda, naudojame komandą:
 ```bash
 make prepare_data
 ```
 
-## Programos paleidimas
-
-Sukuriame virtualią python aplinką ir įdiegiame naudojamas bibliotekas su komanda:
-```bash
-make prepare_python
-```
-
-Parsisiunčiame duomenis, juos paruošiame, paleidžiame modelio apmokinimo kodą ir atliekame įvertinimą su komanda:
-```bash
-make all
-```
-
-### Modelio apmokinimas
+### Modelio pritaikymas
 
 Modelį apmokiname įvardytų esybių atpažinimo uždaviniui ir atliekame įvertinimą su komanda:
 ```bash
 make finetune_modernbertRC1
 ```
 
+## Modelio naudojimas
+
+Modelio testavimo skriptai yra pateikti `inference_rc1.ipynb` faile. Ten rasite modelio naudojimo DEMO ir tuo pačiu galėsite ištestuoti savo apmokytus modelius.
+
+
 ## Skaičiuojami įvertinimo rodikliai
+
+Kiekvienas modelis apmokymo metu yra įvertinamas šiomis metrikomis:
 
 _Token-Level:_
 - Accuracy
