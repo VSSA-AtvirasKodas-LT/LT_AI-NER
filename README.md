@@ -4,8 +4,9 @@ MLKVM kokybės validavimas pagal vieną iš GLUE (angl. General Language Underst
 
 ## Modelis
 
-Validuoti modeliai:
-- ModernBERT Stage 3 RC 1: [neurotechnology/BLKT-ModernBert-MLM-Stage3-RC1](https://huggingface.co/neurotechnology/BLKT-ModernBert-MLM-Stage3-RC1)
+Šiame sprendime buvo validuojamas ModernBERT architektūros bendrasis vektorinis modelis: [VSSA-SDSA/LT-MLKM-modernBERT](https://huggingface.co/VSSA-SDSA/LT-MLKM-modernBERT)
+
+Remiantis šiuo sprendimu NER užduočiai pritaikytą modelį galite rasti: [VSSA-SDSA/LT-NER-modernBERT](https://huggingface.co/VSSA-SDSA/LT-NER-modernBERT)
 
 ## Reikalavimai
 
